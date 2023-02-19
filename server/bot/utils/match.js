@@ -1,8 +1,8 @@
 export default class Match {
 
-    constructor(homeTeam, awayTeam, minutes) {
-        this.homeTeam = homeTeam;
-        this.awayTeam = awayTeam;
+    constructor(home, away, minutes) {
+        this.home = home;
+        this.away = away;
         this.minutes = minutes;
     }
 

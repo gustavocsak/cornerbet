@@ -2,12 +2,15 @@ import Team from './team.js'
 import Match from './match.js'
 
 const matchFormat = (games) => {
+
+    const matches = [];
+    
     for(const game of games) {
 
         
         const home = new Team();
         const away = new Team();
-        const matches = [];
+        
 
         home.name = game.home;
         away.name = game.away;
@@ -42,9 +45,11 @@ const matchFormat = (games) => {
 
         matches.push(match);
 
-        return matches;
+        
 
     }
+
+    return matches;
 }
 
 export default matchFormat;

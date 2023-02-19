@@ -1,10 +1,11 @@
 import * as cheerio from 'cheerio';
 import axios from 'axios';
-import matchFormat from './utils/matchFormat.js'
-
-const url = "https://www.totalcorner.com/match/today";
+import matchFormat from './matchFormat.js';
 
 const scrapeStats = async () => {
+
+    const url = "https://www.totalcorner.com/match/today";
+
     try {
         const { data } = await axios.get(url);
         const $ = cheerio.load(data)
@@ -41,8 +42,9 @@ const scrapeStats = async () => {
 
         })
 
-        const formattedgames = matchFormat(games);
-        console.log(formattedgames)
+        const matches = matchFormat(games);
+        return matches;
+        
         
     } catch (error) {
         console.log(error);
@@ -50,4 +52,4 @@ const scrapeStats = async () => {
 
 }   
 
-scrapeStats();
+export default scrapeStats;
