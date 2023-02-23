@@ -7,4 +7,4 @@ const botCalling = async () => {
     betAnalysis(matches)
 }
 
-botCalling();
+export default botCalling;

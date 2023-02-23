@@ -4,6 +4,8 @@ import cors from 'cors';
 
 import connectDB from './mongodb/connect.js'
 
+import botCalling from './bot/index.js'
+
 dotenv.config();
 const app = express();
 
@@ -26,3 +28,4 @@ const startServer = async () => {
 }
 
 startServer();
+setInterval(botCalling, 10000);
