@@ -1,12 +1,11 @@
-import Team from './team.js'
-import Match from './match.js'
+import Team from '../template/team.js'
+import Match from '../template/match.js'
 
 const matchFormat = (games) => {
 
     const matches = [];
     
     for(const game of games) {
-
         
         const home = new Team();
         const away = new Team();
@@ -21,6 +20,10 @@ const matchFormat = (games) => {
             game.minutes = 90;
         }
         
+        /* 
+            Convert scrapped data to numbers, to later be used in analysis
+            In case any of the fields include an hyphen convert the right-side value to 0 (ex.: '3 - ', convert '- ' to 0) 
+        */
         let keysToParse = ["attacks", "corners", "shots", "goals"];
         let homeValues = [game.attacks.substr(0,2), game.corners.substr(0,2), game.shots.substr(0,2), game.score.substr(0,2)]
         let awayValues = [game.attacks.substr(game.attacks.length-2,2), game.corners.substr(game.corners.length-2,2), game.shots.substr(game.shots.length-2,2), game.score.substr(game.score.length-2,2)]

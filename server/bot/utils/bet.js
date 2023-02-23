@@ -1,18 +1,18 @@
 const betAnalysis = (matches) => {
 
-    const START_MINUTES_FIRST = 38;
+    const START_MINUTES_FIRST = 37;
     const END_MINUTES_FIRST = 44;
 
-    const START_MINUTES_SECOND = 83;
+    const START_MINUTES_SECOND = 70;
     const END_MINUTES_SECOND = 89;
 
     const MIN_ATTACKS_FIRST = START_MINUTES_FIRST - 5;
     const MIN_ATTACKS_SECOND = START_MINUTES_SECOND - 10;
 
-    const betGames = [];
+    const CORNER_SHOT_FIRSTHALF = 7
+    const CORNER_SHOT_SECONDHALF = 14
 
-    const scoreList = [0, 1, -1]
-   
+    const betGames = [];  
 
     for(const match of matches) {
 
@@ -23,17 +23,28 @@ const betAnalysis = (matches) => {
             continue;
         }
 
+        /*
+            Looking for games currently in:
+            > Draw - where home team holds enough attacking action in the game
+            > Away team is winning by one goal - where home team holds enough attacking action in the game
+            Any other score will be discarded 
 
-        let scoreDifference = match.home.goals - match.away.goals;
-
-        if(!scoreList.includes(scoreDifference)) {
+            Previous versions included away team losing by one goal (not implemented for now)
+        */
+        let scoreDifference = match.home.goals - match.away.goals;     
+        if(![0, -1].includes(scoreDifference)) {
             continue;
         }
-
+        console.log(match)
         const cornerShotHome = match.home.attacks + match.home.shots + match.home.corners;
-        const cornerShotAway = match.away.attacks + match.away.shots + match.away.corners;
+                
+        if(matchFirstHalf && (match.home.attacks >= MIN_ATTACKS_FIRST && cornerShotHome >= CORNER_SHOT_FIRSTHALF)) {
+            betGames.push(match)
+        }
 
-        betGames.push(match)
+        if(matchSecondHalf && (match.home.attacks >= MIN_ATTACKS_SECOND && cornerShotHome >= CORNER_SHOT_SECONDHALF)) {
+            betGames.push(match)
+        }
 
     }
 
